@@ -1,0 +1,7 @@
+D:\github\DiscordIntegration-5.0.5\DiscordIntegration\obj\Debug\DiscordIntegration.csproj.AssemblyReference.cache
+D:\github\DiscordIntegration-5.0.5\DiscordIntegration\obj\Debug\DiscordIntegration.csproj.CoreCompileInputs.cache
+D:\github\DiscordIntegration-5.0.5\bin\Plugin\DiscordIntegration.dll
+D:\github\DiscordIntegration-5.0.5\bin\Plugin\DiscordIntegration.pdb
+D:\github\DiscordIntegration-5.0.5\DiscordIntegration\obj\Debug\DiscordIntegration.csproj.CopyComplete
+D:\github\DiscordIntegration-5.0.5\DiscordIntegration\obj\Debug\DiscordIntegration.dll
+D:\github\DiscordIntegration-5.0.5\DiscordIntegration\obj\Debug\DiscordIntegration.pdb

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{56A08520-835E-4D09-BB5C-6EF47E2313FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DiscordIntegration</RootNamespace>
+    <AssemblyName>DiscordIntegration</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>../bin/Plugin</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>stylecop.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>stylecop.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\DiscordIntegration.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="API\EventArgs\Network\ConnectingEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\TerminatedEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\ConnectingErrorEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\ErrorEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\ReceivedEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\ReceivedFullEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\ReceivedPartialEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\ReceivingErrorEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\SendingErrorEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\SentEventArgs.cs" />
+    <Compile Include="API\EventArgs\Network\UpdatingConnectionErrorEventArgs.cs" />
+    <Compile Include="Commands\Add\Add.cs" />
+    <Compile Include="Commands\Main.cs" />
+    <Compile Include="Commands\PlayerList.cs" />
+    <Compile Include="Commands\Reload\Configs.cs" />
+    <Compile Include="Commands\Add\Role.cs" />
+    <Compile Include="Commands\Reload\Language.cs" />
+    <Compile Include="Commands\Reload\Reload.cs" />
+    <Compile Include="Commands\Reload\SyncedRoles.cs" />
+    <Compile Include="Commands\Remove\Role.cs" />
+    <Compile Include="Commands\Remove\User.cs" />
+    <Compile Include="Commands\StaffList.cs" />
+    <Compile Include="Commands\Remove\Remove.cs" />
+    <Compile Include="Commands\Add\User.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Events\NetworkHandler.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="API\Commands\CommandReply.cs" />
+    <Compile Include="API\Configs\Bot.cs" />
+    <Compile Include="API\Commands\BotCommandSender.cs" />
+    <Compile Include="API\Commands\GameCommand.cs" />
+    <Compile Include="API\Commands\RemoteCommand.cs" />
+    <Compile Include="API\Configs\EventsToLog.cs" />
+    <Compile Include="API\User\SyncedUser.cs" />
+    <Compile Include="API\Network.cs" />
+    <Compile Include="Events\MapHandler.cs" />
+    <Compile Include="Events\PlayerHandler.cs" />
+    <Compile Include="DiscordIntegration.cs" />
+    <Compile Include="API\Commands\PlayerCommandSender.cs" />
+    <Compile Include="Patches\CommandLogging.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Events\ServerHandler.cs" />
+    <Compile Include="Language.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API\User\DiscordUser.cs" />
+    <None Include="packages.config" />
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>C:\Users\swd\Desktop\d\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Accessibility" />
+    <Reference Include="AmplifyBloom">
+      <HintPath>C:\Users\swd\Desktop\d\AmplifyBloom.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>C:\Users\swd\Desktop\d\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-Publicized">
+      <HintPath>C:\Users\swd\Desktop\d\Assembly-CSharp-Publicized.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>C:\Users\swd\Desktop\d\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Caress">
+      <HintPath>C:\Users\swd\Desktop\d\Caress.dll</HintPath>
+    </Reference>
+    <Reference Include="CommandSystem.Core">
+      <HintPath>C:\Users\swd\Desktop\d\CommandSystem.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.API">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.CreditTags">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.CreditTags.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.CustomItems">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.CustomItems.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.CustomRoles">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.CustomRoles.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.Events">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.Loader">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.Loader.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.Permissions">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="Exiled.Updater">
+      <HintPath>C:\Users\swd\Desktop\d\Exiled.Updater.dll</HintPath>
+    </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>C:\Users\swd\Desktop\d\Facepunch.Steamworks.Win64.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror">
+      <HintPath>C:\Users\swd\Desktop\d\Mirror.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror.Components">
+      <HintPath>C:\Users\swd\Desktop\d\Mirror.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Sqlite">
+      <HintPath>C:\Users\swd\Desktop\d\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Posix">
+      <HintPath>C:\Users\swd\Desktop\d\Mono.Posix.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>C:\Users\swd\Desktop\d\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.WebBrowser">
+      <HintPath>C:\Users\swd\Desktop\d\Mono.WebBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\swd\Downloads\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NorthwoodLib">
+      <HintPath>C:\Users\swd\Desktop\d\NorthwoodLib.dll</HintPath>
+    </Reference>
+    <Reference Include="PluginAPI">
+      <HintPath>C:\Users\swd\Desktop\d\PluginAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\swd\Desktop\d\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Runtime.Serialization.Xml" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Users\swd\Desktop\d\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>C:\Users\swd\Desktop\d\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>
