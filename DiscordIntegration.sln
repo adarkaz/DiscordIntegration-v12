@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordIntegration", "DiscordIntegration\DiscordIntegration.csproj", "{56A08520-835E-4D09-BB5C-6EF47E2313FB}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "DiscordIntegration.Bot", "DiscordIntegration.Bot\DiscordIntegration.Bot.njsproj", "{1E4C58E5-0FB2-4AB1-BAE6-753CBE11FBC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,7 @@ Global
 		{1E4C58E5-0FB2-4AB1-BAE6-753CBE11FBC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E4C58E5-0FB2-4AB1-BAE6-753CBE11FBC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E4C58E5-0FB2-4AB1-BAE6-753CBE11FBC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E4C58E5-0FB2-4AB1-BAE6-753CBE11FBC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
