@@ -36,7 +36,6 @@ namespace DiscordIntegration
         public string DateFormat { get; private set; } = "dd/MM/yy HH:mm:ss";
         public bool ShouldSyncRoles { get; private set; } = true;
         public bool IsDebugEnabled { get; private set; }
-        public List<string> TrustedAdmins { get; private set; } = new List<string>();
         public string Language { get; private set; } = "english";
     }
 }

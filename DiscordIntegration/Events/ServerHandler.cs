@@ -20,8 +20,6 @@ namespace DiscordIntegration.Events
     /// </summary>
     internal sealed class ServerHandler
     {
-#pragma warning disable SA1600 // Elements should be documented
-
         public async void OnReportingCheater(ReportingCheaterEventArgs ev)
         {
             if (Instance.Config.EventsToLog.ReportingCheater)

@@ -1,0 +1,30 @@
+token: "OTg5NTc4OTgwMzA0NzUyNzQw.GpTw7n.dZ6Wp31aSXIwrlWyAnmiJVrFaAMm-jDCWTKmN4"
+prefix: "+"
+channels:
+  log:
+    commands:
+      - "1133280894996717608"
+    game_events:
+      - "1133280902416441475"
+    bans:
+      - "1133284718570377276"
+    reports:
+      - "1133280914647035945"
+  command:
+    - "1133280927234129991"
+commands:
+  '1133279106981699594':
+    - "oban"
+    - "ban"
+    - "di"
+    - "discordintegration"
+  "1133279155123929128":
+  - .*
+discord_server:
+  id: '1133277908278988800'
+tcp_server:
+  port: 9000
+  ip_address: 127.0.0.1
+keep_alive_interval: 2000
+messages_delay: 1000
+is_debug_enabled: false

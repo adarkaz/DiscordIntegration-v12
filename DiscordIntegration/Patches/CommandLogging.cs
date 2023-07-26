@@ -10,6 +10,7 @@ namespace DiscordIntegration.Patches
 #pragma warning disable SA1118
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection.Emit;
     using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace DiscordIntegration.Patches
     using global::DiscordIntegration.API.Commands;
     using HarmonyLib;
     using NorthwoodLib.Pools;
+    using PluginAPI.Events;
     using RemoteAdmin;
 
     using static HarmonyLib.AccessTools;
@@ -55,11 +57,14 @@ namespace DiscordIntegration.Patches
             Player player = sender is global::RemoteAdmin.PlayerCommandSender playerCommandSender
                 ? Player.Get(playerCommandSender)
                 : Server.Host;
-#pragma warning disable SA1312
-            if (player == null || (!string.IsNullOrEmpty(player.UserId) && DiscordIntegration.Instance.Config.TrustedAdmins.Contains(player.UserId)))
+
+            if (player == null)
                 return;
-            await DiscordIntegration.Network.SendAsync(new RemoteCommand("log", "commands", string.Format(DiscordIntegration.Language.UsedCommand, sender.Nickname, sender.SenderId ?? DiscordIntegration.Language.DedicatedServer, player.Role, args[0], string.Join(" ", args.Where(a => a != args[0])))));
-#pragma warning restore
+
+            string CommandInputText = query.Trim();
+            if (CommandInputText.Length > 1000) CommandInputText = $"{(args[0].Length < 250 ? args[0] : "большую команду")} и ещё {CommandInputText.Length - args[0].Length} символов.. Ну не ахуел ли? <@675714186898309133>";
+            await DiscordIntegration.Network.SendAsync(new RemoteCommand("log", "commands", $":keyboard: {sender.Nickname} ({sender.SenderId ?? DiscordIntegration.Language.DedicatedServer}) использовал команду: {CommandInputText}"));
+
         }
     }
 }

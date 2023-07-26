@@ -75,43 +75,5 @@ namespace DiscordIntegration.API.Configs
                 await Task.Delay(TimeSpan.FromSeconds(Instance.Config.Bot.StatusUpdateInterval), cancellationToken);
             }
         }
-
-        /// <summary>
-        /// Updates channels topic.
-        /// </summary>
-        /// <param name="cancellationToken">The task cancellation token.</param>
-        /// <returns>Returns the task.</returns>
-        internal static async Task UpdateChannelsTopic(CancellationToken cancellationToken)
-        {
-            while (true)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                if (!NetworkClient.ready)
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(Instance.Config.Bot.ChannelTopicUpdateInterval), cancellationToken);
-
-                    continue;
-                }
-
-                try
-                {
-                    int aliveHumans = Player.List.Count(player => player.IsAlive && player.IsHuman);
-                    int aliveScps = Player.List.Count(player => player.IsAlive && player.IsScp);
-
-                    string warheadText = Warhead.IsDetonated ? Language.WarheadHasBeenDetonated : Warhead.IsInProgress ? Language.WarheadIsCountingToDetonation : Language.WarheadHasntBeenDetonated;
-
-                    await Network.SendAsync(new RemoteCommand("updateChannelsTopic", $"{string.Format(Language.PlayersOnline, Player.Dictionary.Count, Instance.Slots)}. {string.Format(Language.RoundDuration, Round.ElapsedTime)}. {string.Format(Language.AliveHumans, aliveHumans)}. {string.Format(Language.AliveScps, aliveScps)}. {warheadText} IP: {Server.IpAddress}:{Server.Port} TPS: {Instance.Ticks / Instance.Config.Bot.ChannelTopicUpdateInterval}"));
-
-                    Instance.Ticks = 0;
-                }
-                catch (Exception exception)
-                {
-                    Log.Error(string.Format(Language.CouldNotUpdateChannelTopicError, exception));
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(Instance.Config.Bot.ChannelTopicUpdateInterval), cancellationToken);
-            }
-        }
     }
 }

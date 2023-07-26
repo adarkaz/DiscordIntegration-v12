@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\DiscordIntegration",
+    "\\DiscordIntegration.Bot",
     "\\DiscordIntegration\\Events",
+    "\\DiscordIntegration\\Patches",
     "\\DiscordIntegration\\Properties"
   ],
-  "SelectedNode": "\\DiscordIntegration\\Events\\PlayerHandler.cs",
+  "SelectedNode": "\\DiscordIntegration\\DiscordIntegration.cs",
   "PreviewInSolutionExplorer": false
 }
