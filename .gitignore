@@ -2,5 +2,5 @@
 packages
 node_modules
 bin
-DiscordIntegration/obj
-DiscordIntegration.Bot/node_modules
+obj
+node_modules
