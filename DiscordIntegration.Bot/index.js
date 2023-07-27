@@ -137,12 +137,14 @@ discordClient.on('error', error => console.error(`[ДИСКОРД-ОШИБКА] 
 
 tcpServer.on('listening', () => console.log(`[NET-ИНФОРМАЦИЯ] Сервер успешно запустился на ${config.tcpServer.ipAddress}:${config.tcpServer.port}.`));
 
-tcpServer.on('error', error => {
+tcpServer.on('error', error =>
+{
     console.error(`[NET-ОШИБКА] ${error === 'EADDRINUSE' ? `${config.address}:${config.port} is already in use!` : `${error}`}`);
     process.exit(0);
 });
 
-tcpServer.on('connection', socket => {
+tcpServer.on('connection', socket =>
+{
   socket.setEncoding('UTF-8');
   socket.setKeepAlive(true, config.keepAliveDuration);
 
@@ -150,7 +152,8 @@ tcpServer.on('connection', socket => {
 
   console.log(`[NET-ИНФОРМАЦИЯ] Подключение налажено с ${socket.address().address}:${socket.address().port}.`);
 
-  socket.on('data', (buffer) => {
+    socket.on('data', (buffer) =>
+    {
     buffer.split('\0').forEach(async remoteCommand => {
       if (!remoteCommand)
         return;
@@ -173,7 +176,8 @@ tcpServer.on('connection', socket => {
     });
   });
 
-  socket.on('error', error => {
+    socket.on('error', error =>
+    {
     if (error.message.includes('ECONNRESET')) {
       console.info('[SOCKET-ИНФОРМАЦИЯ] Server closed connection.');
       log('gameEvents', '```diff\n- Server closed connection.\n```', true);
@@ -186,11 +190,13 @@ tcpServer.on('connection', socket => {
   socket.on('close', () => sockets.splice(sockets.indexOf(socket), 1));
 });
 
-function canExecuteCommand(member, command) {
+function canExecuteCommand(member, command)
+{
     if (!config.commands || !member || typeof command !== 'string')
         return false;
 
-    for (const roleId in config.commands) {
+    for (const roleId in config.commands)
+    {
         const exists = config.commands[roleId].some(configCommand => command.startsWith(configCommand.toLowerCase()) || (configCommand === '.*' && member.roles.cache.has(roleId)));
 
         if (exists) {
@@ -204,7 +210,8 @@ function canExecuteCommand(member, command) {
     return false;
 };
 
-async function loadConfigs() {
+async function loadConfigs()
+{
     console.log('[БОТ-ИНФОРМАЦИЯ] Загрузка конфига...');
 
     try {
