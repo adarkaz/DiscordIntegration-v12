@@ -2,64 +2,26 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using API.Commands;
     using Exiled.API.Features;
-    using Mirror;
     using static DiscordIntegration;
-
-    /// <summary>
-    /// Represents bot-related configs.
-    /// </summary>
     public sealed class Bot
     {
-        /// <summary>
-        /// Gets the bot update activity cancellation token.
-        /// </summary>
         public static CancellationTokenSource UpdateActivityCancellationTokenSource { get; internal set; }
-
-        /// <summary>
-        /// Gets the bot update activity cancellation token.
-        /// </summary>
         public static CancellationTokenSource UpdateChannelsTopicCancellationTokenSource { get; internal set; }
 
-        /// <summary>
-        /// Gets the bot IP address.
-        /// </summary>
         [Description("Bot IP address")]
         public string IPAddress { get; private set; } = "127.0.0.1";
-
-        /// <summary>
-        /// Gets the bot port.
-        /// </summary>
         [Description("Bot port")]
         public ushort Port { get; private set; } = 9000;
-
-        /// <summary>
-        /// Gets the bot status update interval.
-        /// </summary>
         [Description("Bot status update interval, in seconds")]
         public float StatusUpdateInterval { get; private set; } = 5;
-
-        /// <summary>
-        /// Gets the channel topic update interval.
-        /// </summary>
         [Description("Channel topic update interval, in seconds")]
         public float ChannelTopicUpdateInterval { get; private set; } = 300;
-
-        /// <summary>
-        /// Gets the bot reconnection update interval.
-        /// </summary>
         [Description("Time to wait before trying to reconnect again, in seconds")]
         public float ReconnectionInterval { get; private set; } = 5;
-
-        /// <summary>
-        /// Updates the bot activity.
-        /// </summary>
-        /// <param name="cancellationToken">The task cancellation token.</param>
-        /// <returns>Returns the <see cref="Task"/>.</returns>
         internal static async Task UpdateActivity(CancellationToken cancellationToken)
         {
             while (true)
