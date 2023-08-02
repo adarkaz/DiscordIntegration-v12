@@ -1,14 +1,5 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="EventsToLog.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DiscordIntegration.API.Configs
+﻿namespace DiscordIntegration.API.Configs
 {
-#pragma warning disable SA1600 // Elements should be documented
-#pragma warning disable CS1591
     public sealed class EventsToLog
     {
         public bool SendingRemoteAdminCommands { get; private set; } = true;
@@ -20,7 +11,7 @@ namespace DiscordIntegration.API.Configs
         public bool RoundEnded { get; private set; } = true;
 
         public bool WaitingForPlayers { get; private set; } = true;
-
+        public bool RestartingServer { get; private set; } = true;
         public bool ReportingCheater { get; private set; } = true;
 
         public bool HurtingPlayer { get; private set; } = true;

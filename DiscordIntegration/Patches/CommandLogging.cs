@@ -1,70 +1,31 @@
-// -----------------------------------------------------------------------
-// <copyright file="CommandLogging.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
+using System;
+using Exiled.API.Features;
+using DiscordIntegration.API.Commands;
+using HarmonyLib;
+using RemoteAdmin;
 
-namespace DiscordIntegration.Patches
+namespace DiscordIntegration.Patches;
+
+[HarmonyPatch(typeof(CommandProcessor), nameof(CommandProcessor.ProcessQuery))]
+internal class CommandLogging
 {
-#pragma warning disable SA1118
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
-    using System.Linq;
-    using System.Reflection.Emit;
-    using System.Threading.Tasks;
-    using Exiled.API.Features;
-    using global::DiscordIntegration.API;
-    using global::DiscordIntegration.API.Commands;
-    using HarmonyLib;
-    using NorthwoodLib.Pools;
-    using PluginAPI.Events;
-    using RemoteAdmin;
-
-    using static HarmonyLib.AccessTools;
-
-    /// <summary>
-    /// Patches <see cref="RemoteAdmin.CommandProcessor.ProcessQuery"/> for command logging.
-    /// </summary>
-    [HarmonyPatch(typeof(CommandProcessor), nameof(CommandProcessor.ProcessQuery))]
-    internal class CommandLogging
+    [HarmonyPrefix]
+    private static async void LogCommand(string q, CommandSender sender)
     {
-        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
-        {
-            List<CodeInstruction> newInstructions = ListPool<CodeInstruction>.Shared.Rent(instructions);
-            const int index = 0;
+        string[] args = q.Trim().Split(QueryProcessor.SpaceArray, 512, StringSplitOptions.RemoveEmptyEntries);
+        if (args[0].StartsWith("$"))
+            return;
 
-            newInstructions.InsertRange(index, new[]
-            {
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Ldarg_1),
-                new CodeInstruction(OpCodes.Call, Method(typeof(CommandLogging), nameof(LogCommand))),
-            });
+        Player player = sender is RemoteAdmin.PlayerCommandSender playerCommandSender
+            ? Player.Get(playerCommandSender)
+            : Server.Host;
 
-            for (int z = 0; z < newInstructions.Count; z++)
-                yield return newInstructions[z];
+        if (player == null)
+            return;
 
-            ListPool<CodeInstruction>.Shared.Return(newInstructions);
-        }
+        string CommandInputText = q.Trim();
 
-        private static async void LogCommand(string query, CommandSender sender)
-        {
-            string[] args = query.Trim().Split(QueryProcessor.SpaceArray, 512, StringSplitOptions.RemoveEmptyEntries);
-            if (args[0].StartsWith("$"))
-                return;
-
-            Player player = sender is global::RemoteAdmin.PlayerCommandSender playerCommandSender
-                ? Player.Get(playerCommandSender)
-                : Server.Host;
-
-            if (player == null)
-                return;
-
-            string CommandInputText = query.Trim();
-            if (CommandInputText.Length > 1000) CommandInputText = $"{(args[0].Length < 250 ? args[0] : "большую команду")} и ещё {CommandInputText.Length - args[0].Length} символов.. Ну не ахуел ли? <@675714186898309133>";
-            await DiscordIntegration.Network.SendAsync(new RemoteCommand("log", "commands", $":keyboard: {sender.Nickname} ({sender.SenderId ?? DiscordIntegration.Language.DedicatedServer}) использовал команду: {CommandInputText}"));
-
-        }
+        if (CommandInputText.Length > 1000) CommandInputText = $"{(args[0].Length < 250 ? args[0] : "большую команду")} и ещё {CommandInputText.Length - args[0].Length} символов.. Ну не ахуел ли? <@675714186898309133>";
+        await DiscordIntegration.Network.SendAsync(new RemoteCommand("log", "commands", $":keyboard: {sender.Nickname} ({sender.SenderId ?? DiscordIntegration.Language.DedicatedServer}) использовал команду: {CommandInputText}. "));
     }
 }
