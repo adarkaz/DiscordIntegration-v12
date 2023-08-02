@@ -1,11 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="PlayerList.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DiscordIntegration.Commands
+﻿namespace DiscordIntegration.Commands
 {
     using System;
     using System.Text;
@@ -14,13 +7,8 @@ namespace DiscordIntegration.Commands
     using Exiled.Permissions.Extensions;
     using NorthwoodLib.Pools;
     using static DiscordIntegration;
-
-    /// <summary>
-    /// Gets the list of players in the server.
-    /// </summary>
     internal sealed class PlayerList : ICommand
     {
-#pragma warning disable SA1600 // Elements should be documented
         private PlayerList()
         {
         }

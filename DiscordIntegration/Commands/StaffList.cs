@@ -1,11 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="StaffList.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DiscordIntegration.Commands
+﻿namespace DiscordIntegration.Commands
 {
     using System;
     using System.Text;

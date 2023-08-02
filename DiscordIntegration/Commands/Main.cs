@@ -1,15 +1,9 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Main.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DiscordIntegration.Commands
+﻿namespace DiscordIntegration.Commands
 {
-#pragma warning disable SA1600 // Elements should be documented
     using System;
+    using System.Linq;
     using CommandSystem;
+    using Utils.NonAllocLINQ;
     using static DiscordIntegration;
 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
@@ -20,7 +14,7 @@ namespace DiscordIntegration.Commands
 
         public override string Command { get; } = "discordintegration";
 
-        public override string[] Aliases { get; } = new[] { "di", "integration", "discord", "ds" };
+        public override string[] Aliases { get; } = new[] { "di" };
 
         public override string Description { get; } = string.Empty;
 
@@ -35,7 +29,7 @@ namespace DiscordIntegration.Commands
 
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            response = $"{Language.InvalidSubcommand} {Language.Available}: playerlist, stafflist, reload, add, remove";
+            response = $"{Language.InvalidSubcommand} {Language.Available}: {string.Join(", ", Commands.Values.Select(x => x.Command))}"; // playerlist, stafflist, reload, add, remove";
             return false;
         }
     }
