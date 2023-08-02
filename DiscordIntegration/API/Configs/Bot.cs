@@ -1,11 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Bot.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DiscordIntegration.API.Configs
+﻿namespace DiscordIntegration.API.Configs
 {
     using System;
     using System.ComponentModel;

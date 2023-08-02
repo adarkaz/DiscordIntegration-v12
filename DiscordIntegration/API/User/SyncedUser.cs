@@ -1,11 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SyncedUser.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DiscordIntegration.API.User
+﻿namespace DiscordIntegration.API.User
 {
     using Exiled.API.Features;
     using Newtonsoft.Json;

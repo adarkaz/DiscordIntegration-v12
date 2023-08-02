@@ -1,11 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="PlayerCommandSender.cs" company="Exiled Team">
-// Copyright (c) Exiled Team. All rights reserved.
-// Licensed under the CC BY-SA 3.0 license.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DiscordIntegration.API.Commands
+﻿namespace DiscordIntegration.API.Commands
 {
     using Exiled.API.Features;
     using Newtonsoft.Json;
