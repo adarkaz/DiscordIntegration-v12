@@ -20,6 +20,7 @@ internal sealed class ServerHandler
         ServerEvent.RespawningTeam += OnRespawningTeam;
         ServerEvent.ReportingCheater += OnReportingCheater;
         ServerEvent.LocalReporting += OnLocalReporting;
+        ServerEvent.RestartingRound += OnRestarting;
     }
     ~ServerHandler()
     {
@@ -29,6 +30,7 @@ internal sealed class ServerHandler
         ServerEvent.RespawningTeam -= OnRespawningTeam;
         ServerEvent.ReportingCheater -= OnReportingCheater;
         ServerEvent.LocalReporting -= OnLocalReporting;
+        ServerEvent.RestartingRound -= OnRestarting;
     }
     public async void OnReportingCheater(ReportingCheaterEventArgs ev)
     {

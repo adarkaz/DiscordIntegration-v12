@@ -52,7 +52,7 @@ namespace DiscordIntegration.Commands
             else
             {
                 foreach (Player player in Player.List)
-                    message.Append($"{player.Nickname} - {player.UserId} - {player.Id}").AppendLine();
+                    message.Append($"{player.Nickname} - {player.UserId} ({player.Id})").AppendLine();
             }
 
             response = message.ToString();

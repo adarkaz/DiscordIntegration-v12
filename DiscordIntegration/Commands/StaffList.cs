@@ -14,16 +14,9 @@ namespace DiscordIntegration.Commands
     using Exiled.Permissions.Extensions;
     using NorthwoodLib.Pools;
     using static DiscordIntegration;
-
-    /// <summary>
-    /// Gets the list of staffers in the server.
-    /// </summary>
     internal sealed class StaffList : ICommand
     {
-#pragma warning disable SA1600 // Elements should be documented
-        private StaffList()
-        {
-        }
+        private StringBuilder StringBuilder = new();
 
         public static StaffList Instance { get; } = new StaffList();
 
@@ -41,21 +34,24 @@ namespace DiscordIntegration.Commands
                 return false;
             }
 
-            StringBuilder message = StringBuilderPool.Shared.Rent();
+            StringBuilder.Clear();
+            StringBuilder.AppendLine();
 
             foreach (Player player in Player.List)
             {
-                if (player.RemoteAdminAccess)
-                    message.Append(player.Nickname).Append(" - ").Append(player?.GroupName).AppendLine();
+                if (!player.RemoteAdminAccess || player.Group == null || player.GroupName == null) continue;
+
+                StringBuilder.Append(player.Nickname);
+                StringBuilder.Append(" - ");
+                StringBuilder.Append($"{player.UserId} ({player.Id})");
+                StringBuilder.Append(" - ");
+                StringBuilder.Append(player.GroupName).AppendLine();
             }
 
-            if (message.Length == 0)
-                message.Append(Language.NoStaffOnline);
+            if (StringBuilder.Length == 0)
+                StringBuilder.Append(Language.NoStaffOnline);
 
-            response = message.ToString();
-
-            StringBuilderPool.Shared.Return(message);
-
+            response = StringBuilder.ToString();
             return true;
         }
     }
