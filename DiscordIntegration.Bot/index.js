@@ -213,13 +213,11 @@ function canExecuteCommand(member, command)
 async function loadConfigs()
 {
     console.log('[БОТ-ИНФОРМАЦИЯ] Загрузка конфига...');
-
     try {
         if (!fs.existsSync(configPath)) {
             console.error('[БОТ-ОШИБКА] Файл конфига не был найден, генерация...');
 
             fs.writeFileSync(configPath, yaml.dump(snakeCaseKeys(config)));
-
             console.error('[БОТ-ИНФОРМАЦИЯ] Конфиг сгенерирован! Ожидайте...');
 
             await sleep(1500);
