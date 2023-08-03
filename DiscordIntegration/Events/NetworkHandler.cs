@@ -70,7 +70,7 @@ internal sealed class NetworkHandler
     /// <inheritdoc cref="API.Network.OnSendingError(object, SendingErrorEventArgs)"/>
     public void OnSendingError(object _, SendingErrorEventArgs ev)
     {
-        Log.Error($"[NET] {string.Format(Language.SendingDataError, Instance.Config.IsDebugEnabled ? ev.Exception.ToString() : ev.Exception.Message)}");
+        Log.Debug($"[NET] {string.Format(Language.SendingDataError, Instance.Config.IsDebugEnabled ? ev.Exception.ToString() : ev.Exception.Message)}");
     }
 
     /// <inheritdoc cref="API.Network.OnReceivingError(object, ReceivingErrorEventArgs)"/>
@@ -93,7 +93,7 @@ internal sealed class NetworkHandler
         ev.Port = Instance.Config.Bot.Port;
         ev.ReconnectionInterval = TimeSpan.FromSeconds(Instance.Config.Bot.ReconnectionInterval);
 
-        Log.Warn($"[NET] {string.Format(Language.ConnectingTo, ev.IPAddress, ev.Port)}");
+        Log.Debug($"[NET] {string.Format(Language.ConnectingTo, ev.IPAddress, ev.Port)}");
     }
 
     /// <inheritdoc cref="API.Network.OnConnected(object, System.EventArgs)"/>
