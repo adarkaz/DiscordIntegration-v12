@@ -15,7 +15,7 @@ public sealed class Language
         jsonSerializer.Error += Error;
         jsonSerializer.Formatting = Formatting.Indented;
     }
-    public static string Folder { get; } = Path.Combine(Paths.Plugins, Instance.Name, "Languages");
+    public static string Folder { get; } = Path.Combine(Paths.Configs, Instance.Name, "Languages");
     public static string FullPath => Path.Combine(Folder, $"{Instance.Config.Language}.json");
     public string UsedCommand { get; set; } = ":keyboard: {0} ({1}) [{2}] использовал команду: {3} {4}";
     public string RestartingServer { get; set; } = ":wastebasket: Перезагрузка сервера..";
