@@ -21,8 +21,7 @@ public sealed class Config : IConfig
             DamageType.PocketDimension,
     };
     public bool OnlyLogPlayerDamage { get; private set; }
-    public string DateFormat { get; private set; } = "dd/MM/yy HH:mm:ss";
     public bool ShouldSyncRoles { get; private set; } = true;
     public bool IsDebugEnabled { get; private set; }
-    public string Language { get; private set; } = "english";
+    public string Language { get; private set; } = "russian";
 }

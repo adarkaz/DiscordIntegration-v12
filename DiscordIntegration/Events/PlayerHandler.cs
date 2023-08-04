@@ -16,7 +16,9 @@ namespace DiscordIntegration.Events;
 
 using Exiled.API.Features;
 using InventorySystem.Items.Usables;
+using Mono.Unix.Native;
 using System.Runtime.InteropServices;
+using Utf8Json.Formatters;
 using static DiscordIntegration;
 internal sealed class PlayerHandler
 {
@@ -35,8 +37,7 @@ internal sealed class PlayerHandler
         PlayerEvent.ThrownProjectile += OnThrowingGrenade;
         PlayerEvent.Hurting += OnHurting;
         PlayerEvent.Dying += OnDying;
-        PlayerEvent.Kicked += OnKicked;
-        PlayerEvent.Banned += OnBanned;
+        PlayerEvent.Kicking += OnKicking;
         PlayerEvent.InteractingDoor += OnInteractingDoor;
         PlayerEvent.InteractingElevator += OnInteractingElevator;
         PlayerEvent.InteractingLocker += OnInteractingLocker;
@@ -50,7 +51,7 @@ internal sealed class PlayerHandler
         PlayerEvent.ChangingRole += OnChangingRole;
         PlayerEvent.ChangingGroup += OnChangingGroup;
         PlayerEvent.ChangingItem += OnChangingItem;
-
+        PlayerEvent.Banning += OnBanning;
         Scp079Event.InteractingTesla += OnInteractingTesla;
         Scp079Event.GainingLevel += OnGainingLevel;
         Scp079Event.GainingExperience += OnGainingExperience;
@@ -73,8 +74,8 @@ internal sealed class PlayerHandler
         PlayerEvent.ThrownProjectile -= OnThrowingGrenade;
         PlayerEvent.Hurting -= OnHurting;
         PlayerEvent.Dying -= OnDying;
-        PlayerEvent.Kicked -= OnKicked;
-        PlayerEvent.Banned -= OnBanned;
+        PlayerEvent.Kicking -= OnKicking;
+        PlayerEvent.Banning -= OnBanning;
         PlayerEvent.InteractingDoor -= OnInteractingDoor;
         PlayerEvent.InteractingElevator -= OnInteractingElevator;
         PlayerEvent.InteractingLocker -= OnInteractingLocker;
@@ -243,7 +244,7 @@ internal sealed class PlayerHandler
     public async void OnUsedMedicalItem(UsedItemEventArgs ev)
     {
         if (ev.Player != null && Instance.Config.EventsToLog.PlayerUsedMedicalItem)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.UsedMedicalItem, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Item))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.UsedMedicalItem, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, $"{ev.Item.Type} [{ev.Item.Weight}]"))).ConfigureAwait(false);
     }
 
     public async void OnChangingRole(ChangingRoleEventArgs ev)
@@ -280,24 +281,16 @@ internal sealed class PlayerHandler
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasBeenHandcuffedBy, ev.Target.Nickname, ev.Target.UserId, ev.Target.Role, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
     }
 
-    public async void OnKicked(KickedEventArgs ev)
+    public async void OnKicking(KickingEventArgs ev)
     {
-        if (Instance.Config.EventsToLog.PlayerBanned)
-            await Network.SendAsync(new RemoteCommand("log", "kicks", string.Format(Language.WasKicked, ev.Player.Nickname ?? Language.NotAuthenticated, ev.Player?.UserId ?? Language.NotAuthenticated, ev.Reason))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "bans", $":warning: {ev.Target.Nickname} ({ev.Target.UserId}) был кикнут {ev.Player.Nickname} ({ev.Player.UserId}) по причине: {ev.Reason}.")).ConfigureAwait(false);
     }
-
-    public async void OnBanned(BannedEventArgs ev)
+    public async void OnBanning(BanningEventArgs ev)
     {
-        try
-        {
-            await Network.SendAsync(new RemoteCommand("log", "bans", $":no_entry: {ev.Details.OriginalName} ({ev.Details.Id}) был забанен {ev.Details.Issuer} за {ev.Details.Reason} до {new DateTime(ev.Details.Expires).ToString(Instance.Config.DateFormat)}."));
-        }
-        catch (Exception x)
-        {
-            Log.Error(x);
-        }
-    }
+        if (!ev.IsAllowed) return;
 
+        await Network.SendAsync(new RemoteCommand("log", "bans", $":no_entry: {ev.Target.Nickname} ({ev.Target.UserId} - {ev.Target.IPAddress}) был забанен {ev.Player.Nickname} ({ev.Player.UserId}) по причине: {ev.Reason}\nдо {DateTime.Now.AddSeconds(ev.Duration).ToString("HH:mm:ss - dd.MM.yyyy")}"));
+    }
     public async void OnIntercomSpeaking(IntercomSpeakingEventArgs ev)
     {
         if (ev.Player != null && Instance.Config.EventsToLog.PlayerIntercomSpeaking)

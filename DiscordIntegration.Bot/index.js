@@ -340,7 +340,8 @@ function log(type, content, isInstant = false)
     if (!config.channels.log[type])
         return;
 
-    let stripped = content.replace(/\b((?:[a-z-\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.-a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/g, '')
+        // Заметка: Regex детектит ссылки, но какого-то ебанного хуя этот еблан который писал этот регикс настолько даун что оно детектит любые цифры через : (например 12:12:12)
+    let stripped = content; //.replace(/\b((?:[a-z-\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.-a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/g, '')
     config.channels.log[type].forEach(channelId => isInstant ? sendMessage(channelId, stripped, true) : queueMessage(channelId, stripped));
 }
 

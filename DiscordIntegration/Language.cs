@@ -20,28 +20,21 @@ public sealed class Language
     public string UsedCommand { get; set; } = ":keyboard: {0} ({1}) [{2}] использовал команду: {3} {4}";
     public string RestartingServer { get; set; } = ":wastebasket: Перезагрузка сервера..";
     public string HasRunClientConsoleCommand { get; set; } = ":keyboard: {0} ({1}) [{2}] использовал клиенсткую-команду: {3} {4}";
-
     public string NoPlayersOnline { get; set; } = "Нет игроков онлайн.";
-
     public string NoStaffOnline { get; set; } = "Нет админов онлайн..";
-
     public string WaitingForPlayers { get; set; } = $":hourglass: Ожидание игроков..";
-
     public string RoundStarting { get; set; } = ":arrow_forward: Раунд начинается: {0} игроков в раунде.";
-
     public string RoundEnded { get; set; } = ":stop_button: Раунд завершен: {0} - Игроков онлайн: {1}/{2}.";
-
     public string PlayersOnline { get; set; } = "Игроков онлайн: {0}/{1}";
-
     public string RoundDuration { get; set; } = "Время раунда: {0}";
 
     public string AliveHumans { get; set; } = "Живых людей: {0}";
 
     public string AliveScps { get; set; } = "Живых SCP: {0}";
 
-    public string ReportFilled { get; set; } = ":incoming_envelope: Отправлен репорт: {0} ({1}) [{2}] зарепортил {3} ({4}) [{5}] за {6}.**";
+    public string ReportFilled { get; set; } = ":incoming_envelope: Отправлен репорт:\n{0} ({1}) [{2}] отправил репорт на: {3} ({4}) [{5}] за {6}.";
 
-    public string CheaterReportFilled { get; set; } = ":incoming_envelope: Отправлен репорт на читера: {0} ({1}) [{2}] зарепортил {3} ({4}) [{5}] за {6}.**";
+    public string CheaterReportFilled { get; set; } = ":incoming_envelope: Отправлен репорт на читера:\n{0} ({1}) [{2}] отправил репорт на: {3} ({4}) [{5}] за {6}.";
 
     public string HasDamagedForWith { get; set; } = ":crossed_swords: **{0} ({1}) [{2}] нанес урон {3} ({4}) [{5}] на {6} с помощью {7}.**";
 
@@ -49,7 +42,7 @@ public sealed class Language
 
     public string ThrewAGrenade { get; set; } = ":boom: {0} ({1}) [{2}] бросил {3}.";
 
-    public string UsedMedicalItem { get; set; } = ":medical_symbol: {0} ({1}) [{2}] исцелился с помощью {3}.";
+    public string UsedMedicalItem { get; set; } = ":medical_symbol: {0} ({1}) [{2}] использовал {3}.";
 
     public string ChangedRole { get; set; } = ":mens: {0} ({1}) [{2}] был переведен в {3}.";
 
