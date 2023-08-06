@@ -1,7 +1,6 @@
 ﻿namespace DiscordIntegration.API.EventArgs.Network
 {
     using System;
-    using System.Text;
 
     /// <summary>
     /// Contains all informations after the network received data.

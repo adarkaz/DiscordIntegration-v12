@@ -5,7 +5,6 @@
     using CommandSystem;
     using Exiled.API.Features;
     using Exiled.Permissions.Extensions;
-    using NorthwoodLib.Pools;
     using static DiscordIntegration;
     internal sealed class StaffList : ICommand
     {

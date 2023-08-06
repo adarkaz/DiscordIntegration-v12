@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using CommandSystem;
-    using Utils.NonAllocLINQ;
     using static DiscordIntegration;
 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]

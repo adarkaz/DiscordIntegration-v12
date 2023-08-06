@@ -15,10 +15,6 @@ using PlayerRoles;
 namespace DiscordIntegration.Events;
 
 using Exiled.API.Features;
-using InventorySystem.Items.Usables;
-using Mono.Unix.Native;
-using System.Runtime.InteropServices;
-using Utf8Json.Formatters;
 using static DiscordIntegration;
 internal sealed class PlayerHandler
 {

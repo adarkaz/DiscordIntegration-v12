@@ -347,7 +347,7 @@ namespace DiscordIntegration.API
 
                     if (receivedData.IndexOf('\0') != -1)
                     {
-                        foreach (var splittedData in receivedData.Split('\0'))
+                        foreach (string splittedData in receivedData.Split('\0'))
                         {
                             if (totalReceivedData.Length > 0)
                             {

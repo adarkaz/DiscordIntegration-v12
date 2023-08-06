@@ -1,5 +1,5 @@
 ﻿namespace DiscordIntegration.API.EventArgs.Network;
-    using System;
+using System;
 
 public class ConnectingErrorEventArgs : ErrorEventArgs
 {

@@ -2,9 +2,7 @@ using DiscordIntegration.API.Commands;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
-using HarmonyLib;
 using Respawning;
-using System.Runtime.InteropServices;
 using ServerEvent = Exiled.Events.Handlers.Server;
 
 namespace DiscordIntegration.Events;

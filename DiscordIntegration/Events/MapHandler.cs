@@ -7,7 +7,6 @@ using Exiled.Events.EventArgs.Map;
 using Exiled.Events.EventArgs.Scp914;
 using Exiled.Events.EventArgs.Warhead;
 using DiscordIntegration.API;
-using System.Runtime.InteropServices;
 using Handlers = Exiled.Events.Handlers;
 
 namespace DiscordIntegration.Events;

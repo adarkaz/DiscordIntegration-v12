@@ -1,10 +1,10 @@
 ﻿// -----------------------------------------------------------------------
 namespace DiscordIntegration;
-    using System;
-    using System.IO;
-    using Exiled.API.Features;
-    using Newtonsoft.Json;
-    using static DiscordIntegration;
+using System;
+using System.IO;
+using Exiled.API.Features;
+using Newtonsoft.Json;
+using static DiscordIntegration;
 
 [JsonObject(ItemRequired = Required.Always)]
 public sealed class Language
