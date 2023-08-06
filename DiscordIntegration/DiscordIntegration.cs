@@ -36,6 +36,7 @@ public class DiscordIntegration : Plugin<Config>
     public short Ticks { get; internal set; }
     public override void OnEnabled()
     {
+        
         harmony = new Harmony($"DiscordIntegration - {DateTime.Now.Ticks}");
         harmony.PatchAll();
 
