@@ -20,7 +20,6 @@ public sealed class Config : IConfig
             DamageType.Scp207,
             DamageType.PocketDimension,
     };
-    public bool OnlyLogPlayerDamage { get; private set; }
     public bool ShouldSyncRoles { get; private set; } = true;
     public bool IsDebugEnabled { get; private set; }
     public string Language { get; private set; } = "russian";

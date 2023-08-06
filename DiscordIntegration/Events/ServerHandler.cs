@@ -32,12 +32,16 @@ internal sealed class ServerHandler
     }
     public async void OnReportingCheater(ReportingCheaterEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.ReportingCheater)
             await Network.SendAsync(new RemoteCommand("log", "reports", string.Format(Language.ReportFilled, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Target.Nickname, ev.Target.UserId, ev.Target.Role, ev.Reason))).ConfigureAwait(false);
     }
 
     public async void OnLocalReporting(LocalReportingEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.ReportingCheater)
             await Network.SendAsync(new RemoteCommand("log", "reports", string.Format(Language.CheaterReportFilled, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Target.Nickname, ev.Target.UserId, ev.Target.Role, ev.Reason))).ConfigureAwait(false);
     }
@@ -66,6 +70,8 @@ internal sealed class ServerHandler
 
     public async void OnRespawningTeam(RespawningTeamEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.RespawningTeam)
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(ev.NextKnownTeam == SpawnableTeamType.ChaosInsurgency ? Language.ChaosInsurgencyHaveSpawned : Language.NineTailedFoxHaveSpawned, ev.Players.Count))).ConfigureAwait(false);
     }

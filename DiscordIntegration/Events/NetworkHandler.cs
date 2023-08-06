@@ -78,9 +78,6 @@ internal sealed class NetworkHandler
     {
         Log.Error($"[NET] {string.Format(Language.ReceivingDataError, Instance.Config.IsDebugEnabled ? ev.Exception.ToString() : ev.Exception.Message)}");
     }
-
-    /// <inheritdoc cref="API.Network.OnSent(object, SentEventArgs)"/>
-    /// <inheritdoc cref="API.Network.OnConnecting(object, ConnectingEventArgs)"/>
     public void OnConnecting(object _, ConnectingEventArgs ev)
     {
         if (!IPAddress.TryParse(Instance.Config?.Bot?.IPAddress, out IPAddress ipAddress))
@@ -95,28 +92,21 @@ internal sealed class NetworkHandler
 
         Log.Debug($"[NET] {string.Format(Language.ConnectingTo, ev.IPAddress, ev.Port)}");
     }
-
-    /// <inheritdoc cref="API.Network.OnConnected(object, System.EventArgs)"/>
     public async void OnConnected(object _, System.EventArgs ev)
     {
         Log.Info($"[NET] {string.Format(Language.SuccessfullyConnected, Network.IPEndPoint?.Address, Network.IPEndPoint?.Port)}");
 
         await Network.SendAsync(new RemoteCommand("log", "gameEvents", Language.ServerConnected, true));
     }
-
-    /// <inheritdoc cref="API.Network.OnConnectingError(object, ConnectingErrorEventArgs)"/>
     public void OnConnectingError(object _, ConnectingErrorEventArgs ev)
     {
         Log.Error($"[NET] {string.Format(Language.ConnectingError, Instance.Config.IsDebugEnabled ? ev.Exception.ToString() : ev.Exception.Message)}");
     }
-
-    /// <inheritdoc cref="API.Network.OnConnectingError(object, ConnectingErrorEventArgs)"/>
     public void OnUpdatingConnectionError(object _, UpdatingConnectionErrorEventArgs ev)
     {
         Log.Error($"[NET] {string.Format(Language.UpdatingConnectionError, Instance.Config.IsDebugEnabled ? ev.Exception.ToString() : ev.Exception.Message)}");
     }
 
-    /// <inheritdoc cref="API.Network.OnTerminated(object, TerminatedEventArgs)"/>
     public void OnTerminated(object _, TerminatedEventArgs ev)
     {
         if (ev.Task.IsFaulted)

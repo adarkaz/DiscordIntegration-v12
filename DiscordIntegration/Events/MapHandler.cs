@@ -42,25 +42,33 @@ internal sealed class MapHandler
     }
     public async void OnGeneratorActivated(GeneratorActivatedEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.GeneratorActivated)
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorFinished, ev.Generator.Room, Generator.Get(GeneratorState.Engaged).Count() + 1))).ConfigureAwait(false);
     }
     public async void OnDecontaminating(DecontaminatingEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.Decontaminating)
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", Language.DecontaminationHasBegun)).ConfigureAwait(false);
     }
 
     public async void OnStartingWarhead(StartingEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.StartingWarhead && (ev.Player == null || (ev.Player != null)))
         {
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.PlayerWarheadStarted, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, Warhead.RealDetonationTimer))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.PlayerWarheadStarted, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, Warhead.DetonationTimer))).ConfigureAwait(false);
         }
     }
 
     public async void OnStoppingWarhead(StoppingEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.StoppingWarhead && (ev.Player == null || (ev.Player != null)))
         {
             object[] vars = ev.Player == null ?
@@ -73,6 +81,8 @@ internal sealed class MapHandler
 
     public async void OnUpgradingItems(UpgradingInventoryItemEventArgs ev)
     {
+        if (!ev.IsAllowed) return;
+
         if (Instance.Config.EventsToLog.UpgradingScp914Items)
         {
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp914ProcessedItem, ev.Item.Type)));

@@ -89,6 +89,7 @@
         public bool GeneratorActivated { get; private set; } = true;
 
         public bool Scp106Teleporting { get; private set; } = true;
+        public bool Scp106Stalking { get; private set; } = true;
 
         public bool CreatingScp106Portal { get; private set; } = true;
 

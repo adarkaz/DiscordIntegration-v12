@@ -10,6 +10,8 @@ namespace DiscordIntegration;
 using API;
 using API.Configs;
 using API.User;
+using Exiled.API.Enums;
+
 public class DiscordIntegration : Plugin<Config>
 {
     public override string Author => "swd";
@@ -28,6 +30,7 @@ public class DiscordIntegration : Plugin<Config>
     public static Network Network { get; private set; }
     public static CancellationTokenSource NetworkCancellationTokenSource { get; private set; }
     public static DiscordIntegration Instance => InstanceValue;
+    public override PluginPriority Priority => PluginPriority.Last;
     public HashSet<SyncedUser> SyncedUsersCache { get; } = new HashSet<SyncedUser>();
     public int Slots => CustomNetworkManager.slots;
     public short Ticks { get; internal set; }

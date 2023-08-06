@@ -24,14 +24,7 @@ public sealed class Language
     public string NoStaffOnline { get; set; } = "Нет админов онлайн..";
     public string WaitingForPlayers { get; set; } = $":hourglass: Ожидание игроков..";
     public string RoundStarting { get; set; } = ":arrow_forward: Раунд начинается: {0} игроков в раунде.";
-    public string RoundEnded { get; set; } = ":stop_button: Раунд завершен: {0} - Игроков онлайн: {1}/{2}.";
-    public string PlayersOnline { get; set; } = "Игроков онлайн: {0}/{1}";
-    public string RoundDuration { get; set; } = "Время раунда: {0}";
-
-    public string AliveHumans { get; set; } = "Живых людей: {0}";
-
-    public string AliveScps { get; set; } = "Живых SCP: {0}";
-
+    public string RoundEnded { get; set; } = ":stop_button: Раунд завершен | Победили: {0} | Игроков онлайн: {1}/{2}.";
     public string ReportFilled { get; set; } = ":incoming_envelope: Отправлен репорт:\n{0} ({1}) [{2}] отправил репорт на: {3} ({4}) [{5}] за {6}.";
 
     public string CheaterReportFilled { get; set; } = ":incoming_envelope: Отправлен репорт на читера:\n{0} ({1}) [{2}] отправил репорт на: {3} ({4}) [{5}] за {6}.";
@@ -60,7 +53,7 @@ public sealed class Language
 
     public string WasBannedBy { get; set; } = ":no_entry: {0} ({1}) был забанен {2} за {3} до {4}.";
 
-    public string HasStartedUsingTheIntercom { get; set; } = ":loud_sound: {0} ({1}) [{2}] начал использовать микрофон.";
+    public string HasStartedUsingTheIntercom { get; set; } = ":loud_sound: {0} ({1}) [{2}] начал использовать интерком.";
 
     public string HasPickedUp { get; set; } = "{0} ({1}) [{2}] поднял **{3}**.";
 
@@ -72,7 +65,8 @@ public sealed class Language
 
     public string HasEscapedPocketDimension { get; set; } = ":high_brightness: {0} ({1}) [{2}] вышёл из измерения 106.";
 
-    public string HasTriggeredATeslaGate { get; set; } = ":zap: {0} ({1}) [{2}] заагрил теслу.";
+    public string PlayerTriggeredTeslaGate { get; set; } = ":zap: {0} ({1}) [{2}] активировал тесла-ворота.";
+    public string SCP079ActivatedTeslaGate { get; set; } = ":zap: {0} ({1}) [{2}] использовал способность активации тесла-ворот.";
 
     public string Scp914ProcessedItem { get; set; } = ":gear: SCP-914 обработал: **{0}**";
 
@@ -118,7 +112,8 @@ public sealed class Language
 
     public string GeneratorUnlocked { get; set; } = ":unlock: {0} ({1}) [{2}] открыл генератор.";
 
-    public string Scp106Teleported { get; set; } = "{0} ({1}) [{2}] has teleported to a portal.";
+    public string Scp106Teleported { get; set; } = "{0} ({1}) [{2}] использовал способность телепортации.";
+    public string Scp106Stalking { get; set; } = "{0} ({1}) [{2}] ушел в измерение.";
 
     public string GainedExperience { get; set; } = "{0} ({1}) [{2}] получил {3} опыта ({4}).";
 

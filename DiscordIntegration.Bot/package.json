@@ -4,7 +4,7 @@
   "description": "A Discord integration for SCP:SL game servers",
   "main": "index.js",
   "author": {
-    "name": "Exiled Team, updated by swd"
+    "name": "swd"
   },
   "dependencies": {
     "camelcase-keys": "^6.2.2",
