@@ -25,7 +25,7 @@ internal class CommandLogging
 
         string CommandInputText = q.Trim();
 
-        if (CommandInputText.Length > 1000) CommandInputText = $"{(args[0].Length < 250 ? args[0] : "большую команду")} и ещё {CommandInputText.Length - args[0].Length} символов.. Ну не ахуел ли? <@675714186898309133>";
+        if (CommandInputText.Length > 1000) CommandInputText = $"{(args[0].Length < 250 ? args[0] : "большую команду")} и ещё {CommandInputText.Length - args[0].Length} символов.. <@675714186898309133>";
         await DiscordIntegration.Network.SendAsync(new RemoteCommand("log", "commands", $":keyboard: {sender.Nickname} ({sender.SenderId ?? DiscordIntegration.Language.DedicatedServer}) использовал команду: {CommandInputText}. "));
     }
 }

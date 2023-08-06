@@ -283,7 +283,7 @@ internal sealed class PlayerHandler
 
     public async void OnKicking(KickingEventArgs ev)
     {
-            await Network.SendAsync(new RemoteCommand("log", "bans", $":warning: {ev.Target.Nickname} ({ev.Target.UserId}) был кикнут {ev.Player.Nickname} ({ev.Player.UserId}) по причине: {ev.Reason}.")).ConfigureAwait(false);
+        await Network.SendAsync(new RemoteCommand("log", "bans", $":warning: {ev.Target.Nickname} ({ev.Target.UserId}) был кикнут {ev.Player.Nickname} ({ev.Player.UserId}) по причине: {ev.Reason}.")).ConfigureAwait(false);
     }
     public async void OnBanning(BanningEventArgs ev)
     {
