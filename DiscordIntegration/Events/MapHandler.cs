@@ -18,7 +18,7 @@ internal sealed class MapHandler
     public MapHandler()
     {
         Handlers.Map.Decontaminating += OnDecontaminating;
-        Handlers.Map.GeneratorActivated += OnGeneratorActivated;
+        Handlers.Map.GeneratorActivating += OnGeneratorActivated;
 
         Handlers.Scp914.UpgradingInventoryItem += OnUpgradingItems;
 
@@ -29,7 +29,7 @@ internal sealed class MapHandler
     ~MapHandler()
     {
         Handlers.Map.Decontaminating -= OnDecontaminating;
-        Handlers.Map.GeneratorActivated -= OnGeneratorActivated;
+        Handlers.Map.GeneratorActivating -= OnGeneratorActivated;
         Handlers.Warhead.Starting -= OnStartingWarhead;
         Handlers.Warhead.Stopping -= OnStoppingWarhead;
         Handlers.Warhead.Detonated -= OnWarheadDetonated;
@@ -40,7 +40,7 @@ internal sealed class MapHandler
         if (Instance.Config.EventsToLog.WarheadDetonated)
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", Language.WarheadHasDetonated)).ConfigureAwait(false);
     }
-    public async void OnGeneratorActivated(GeneratorActivatedEventArgs ev)
+    public async void OnGeneratorActivated(GeneratorActivatingEventArgs ev)
     {
         if (!ev.IsAllowed) return;
 

@@ -106,7 +106,7 @@ public sealed class Language
 
     public string GeneratorEjected { get; set; } = "{0} ({1}) [{2}] отключил запуск генератора.";
 
-    public string GeneratorFinished { get; set; } = "Генератор в {0} был активирован\n{1} генераторов было активировано.";
+    public string GeneratorFinished { get; set; } = "Генератор в {0} начинает свой запуск. {1} генераторов было активировано.";
 
     public string GeneratorInserted { get; set; } = ":calling: {0} ({1}) [{2}] включил запуск генератора.";
 

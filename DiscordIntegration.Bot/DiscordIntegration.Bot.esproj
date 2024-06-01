@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.89-alpha">
+  <PropertyGroup>
+    <!--Command to run on project build-->
+    <BuildCommand>
+    </BuildCommand>
+    <!--Command to run on project clean-->
+    <CleanCommand>
+    </CleanCommand>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="PROJECT_MIGRATION_LOG.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove=".vscode\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove=".vscode\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove=".vscode/launch.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove="bin\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="bin\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="bin\Microsoft.NodejsTools.WebRole.dll" />
+  </ItemGroup>
+</Project>

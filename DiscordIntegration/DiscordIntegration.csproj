@@ -92,32 +92,29 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule" HintPath="$(UNITY_REFERENCES)\UnityEngine.CoreModule.dll" />
-    <Reference Include="UnityEngine.UnityWebRequestModule" HintPath="$(UNITY_REFERENCES)\UnityEngine.UnityWebRequestModule.dll" />
-    <Reference Include="UnityEngine.AnimationModule" HintPath="$(UNITY_REFERENCES)\UnityEngine.AnimationModule.dll" />
-    <Reference Include="UnityEngine.PhysicsModule" HintPath="$(UNITY_REFERENCES)\UnityEngine.PhysicsModule.dll" />
-    <Reference Include="Assembly-CSharp-Publicized" HintPath="$(SL_REFERENCES)\Assembly-CSharp-Publicized.dll" />
-    <Reference Include="Assembly-CSharp-firstpass" HintPath="$(SL_REFERENCES)\Assembly-CSharp-firstpass.dll" />
-    <Reference Include="UnityEngine.AudioModule" HintPath="$(UNITY_REFERENCES)\UnityEngine.AudioModule.dll" />
-    <Reference Include="YamlDotNet" HintPath="$(SL_REFERENCES)\YamlDotNet.dll" />
-    <Reference Include="Mono.Posix" HintPath="$(SL_REFERENCES)\Mono.Posix.dll" />
-    <Reference Include="0Harmony" HintPath="$(EXILED_REFERENCES)\0Harmony.dll" />
-    <Reference Include="PluginAPI" HintPath="$(SL_REFERENCES)\PluginAPI.dll" />
-    <Reference Include="Pooling" HintPath="$(SL_REFERENCES)\Pooling.dll" />
-    <Reference Include="Mirror" HintPath="$(SL_REFERENCES)\Mirror.dll" />
-    <Reference Include="Caress" HintPath="$(SL_REFERENCES)\Caress.dll" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(EXILED_REFERENCES)\UnityEngine.CoreModule.dll" />
+    <Reference Include="UnityEngine.UnityWebRequestModule" HintPath="$(EXILED_REFERENCES)\UnityEngine.UnityWebRequestModule.dll" />
+    <Reference Include="UnityEngine.AnimationModule" HintPath="$(EXILED_REFERENCES)\UnityEngine.AnimationModule.dll" />
+    <Reference Include="UnityEngine.PhysicsModule" HintPath="$(EXILED_REFERENCES)\UnityEngine.PhysicsModule.dll" />
+    <Reference Include="Assembly-CSharp-Publicized" HintPath="$(EXILED_REFERENCES)\Assembly-CSharp-Publicized.dll" />
+    <Reference Include="Assembly-CSharp-firstpass" HintPath="$(EXILED_REFERENCES)\Assembly-CSharp-firstpass.dll" />
+    <Reference Include="UnityEngine.AudioModule" HintPath="$(EXILED_REFERENCES)\UnityEngine.AudioModule.dll" />
+    <Reference Include="Exiled.Permissions" HintPath="$(EXILED_REFERENCES)\Exiled.Permissions.dll" />
+    <Reference Include="CommandSystem.Core" HintPath="$(EXILED_REFERENCES)\CommandSystem.Core.dll" />
     <Reference Include="Exiled.Loader" HintPath="$(EXILED_REFERENCES)\Exiled.Loader.dll" />
     <Reference Include="Exiled.Events" HintPath="$(EXILED_REFERENCES)\Exiled.Events.dll" />
     <Reference Include="Exiled.API" HintPath="$(EXILED_REFERENCES)\Exiled.API.dll" />
-    <Reference Include="Exiled.Permissions" HintPath="$(EXILED_REFERENCES)\Exiled.Permissions.dll" />
-    <Reference Include="CommandSystem.Core" HintPath="$(SL_REFERENCES)\CommandSystem.Core.dll" />
-    <Reference Include="NorthwoodLib" HintPath="$(SL_REFERENCES)\NorthwoodLib.dll" />
+    <Reference Include="NorthwoodLib" HintPath="$(EXILED_REFERENCES)\NorthwoodLib.dll" />
+    <Reference Include="YamlDotNet" HintPath="$(EXILED_REFERENCES)\YamlDotNet.dll" />
+    <Reference Include="Mono.Posix" HintPath="$(EXILED_REFERENCES)\Mono.Posix.dll" />
+    <Reference Include="0Harmony" HintPath="$(EXILED_REFERENCES)\0Harmony.dll" />
+    <Reference Include="PluginAPI" HintPath="$(EXILED_REFERENCES)\PluginAPI.dll" />
+    <Reference Include="Pooling" HintPath="$(EXILED_REFERENCES)\Pooling.dll" />
+    <Reference Include="Mirror" HintPath="$(EXILED_REFERENCES)\Mirror.dll" />
+    <Reference Include="Caress" HintPath="$(EXILED_REFERENCES)\Caress.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -126,7 +126,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.ChangingPlayerItem)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.ItemChanged, ev.Player.Nickname, ev.Player.UserId, ev.Player.CurrentItem.Type, ev.NewItem.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.ItemChanged, ev.Player.Nickname, ev.Player.UserId, ev.Player.CurrentItem.Type, ev.Item.Type))).ConfigureAwait(false);
     }
 
     public async void OnGainingExperience(GainingExperienceEventArgs ev)
