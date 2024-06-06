@@ -421,10 +421,30 @@ async function close(exit = false) {
 
 async function handleMessagesQueue() {
     for (; ;) {
-        for (const channelId in messagesQueue)
-            sendMessage(channelId, messagesQueue[channelId]);
+        for (const channelId in messagesQueue) {
+            message_queue = messagesQueue[channelId];
 
-        messagesQueue = {};
+            if (message_queue.length > 1900) {
+                let msg = " ";
+                var split = message_queue.match(/.{1,95}/g)
+
+                let i = 0;
+
+                while (msg.length < 1900) {
+                    msg += split[i];
+                    i++;
+                }
+                
+                sendMessage(channelId, msg);
+
+                messagesQueue[channelId] = messagesQueue[channelId].substring(msg.length);
+            }
+            else {
+                sendMessage(channelId, message_queue);
+                
+                delete messagesQueue[channelId];
+            }
+        }
         await sleep(config.messagesDelay);
     }
 }

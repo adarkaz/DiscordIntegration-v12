@@ -33,7 +33,6 @@ public class DiscordIntegration : Plugin<Config>
     public override PluginPriority Priority => PluginPriority.Last;
     public HashSet<SyncedUser> SyncedUsersCache { get; } = new HashSet<SyncedUser>();
     public int Slots => CustomNetworkManager.slots;
-    public short Ticks { get; internal set; }
     public override void OnEnabled()
     {
         
@@ -52,8 +51,6 @@ public class DiscordIntegration : Plugin<Config>
         ServerHandler = new();
         PlayerHandler = new();
         NetworkHandler = new();
-
-        coroutines.Add(Timing.RunCoroutine(CountTicks(), Segment.Update));
 
         Bot.UpdateActivityCancellationTokenSource = new CancellationTokenSource();
         Bot.UpdateChannelsTopicCancellationTokenSource = new CancellationTokenSource();
@@ -81,8 +78,6 @@ public class DiscordIntegration : Plugin<Config>
         Bot.UpdateChannelsTopicCancellationTokenSource.Cancel();
         Bot.UpdateChannelsTopicCancellationTokenSource.Dispose();
 
-        Ticks = 0;
-
         SyncedUsersCache.Clear();
 
         MapHandler = null;
@@ -102,13 +97,4 @@ public class DiscordIntegration : Plugin<Config>
         coroutines.Clear();
     }
 
-    private IEnumerator<float> CountTicks()
-    {
-        while (true)
-        {
-            Ticks++;
-
-            yield return Timing.WaitForOneFrame;
-        }
-    }
 }
