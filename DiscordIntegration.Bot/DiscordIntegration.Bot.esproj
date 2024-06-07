@@ -8,9 +8,6 @@
     </CleanCommand>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="PROJECT_MIGRATION_LOG.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptConfiguration Remove=".vscode\**" />
   </ItemGroup>
   <ItemGroup>

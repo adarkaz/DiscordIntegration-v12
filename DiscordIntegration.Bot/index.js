@@ -437,7 +437,7 @@ async function handleMessagesQueue() {
                 
                 sendMessage(channelId, msg);
 
-                messagesQueue[channelId] = messagesQueue[channelId].substring(msg.length);
+                messagesQueue[channelId] = messagesQueue[channelId].substring(msg.length, messagesQueue[channelId].length)
             }
             else {
                 sendMessage(channelId, message_queue);
