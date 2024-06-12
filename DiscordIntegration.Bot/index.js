@@ -431,7 +431,7 @@ async function handleMessagesQueue() {
                 let i = 0;
 
                 while (msg.length < 1900) {
-                    if (split[i].match("/\[\d/g")) {
+                    if (split[i].match(/\[\d/g)) {
                         msg += "\n" + split[i];
                     }
                     else msg += split[i];
