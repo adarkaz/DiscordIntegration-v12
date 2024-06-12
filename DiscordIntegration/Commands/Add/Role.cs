@@ -18,7 +18,7 @@ namespace DiscordIntegration.Commands.Add
     /// </summary>
     internal sealed class Role : ICommand
     {
-#pragma warning disable SA1600 // Elements should be documented
+        public bool SanitizeResponse { get; } = false;
         private Role()
         {
         }

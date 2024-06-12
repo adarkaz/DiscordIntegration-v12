@@ -9,7 +9,7 @@
     internal sealed class StaffList : ICommand
     {
         private StringBuilder StringBuilder = new();
-
+        public bool SanitizeResponse { get; } = false;
         public static StaffList Instance { get; } = new StaffList();
 
         public string Command { get; } = "stafflist";

@@ -73,7 +73,7 @@ internal sealed class MapHandler
         {
             object[] vars = ev.Player == null ?
                 Array.Empty<object>() :
-                new object[] { ev.Player.Nickname, ev.Player.UserId, ev.Player.Role };
+                new object[] { ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type };
 
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(ev.Player == null ? Language.CanceledWarhead : Language.PlayerCanceledWarhead, vars))).ConfigureAwait(false);
         }

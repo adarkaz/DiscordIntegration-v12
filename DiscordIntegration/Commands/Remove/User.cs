@@ -17,7 +17,7 @@ namespace DiscordIntegration.Commands.Remove
     /// </summary>
     internal sealed class User : ICommand
     {
-#pragma warning disable SA1600 // Elements should be documented
+        public bool SanitizeResponse { get; } = false;
         private User()
         {
         }

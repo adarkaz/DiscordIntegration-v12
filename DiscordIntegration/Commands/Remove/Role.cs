@@ -17,6 +17,7 @@ namespace DiscordIntegration.Commands.Remove
     /// </summary>
     internal sealed class Role : ICommand
     {
+        public bool SanitizeResponse { get; } = false;
         private Role()
         {
         }

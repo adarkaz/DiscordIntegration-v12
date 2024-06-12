@@ -310,7 +310,7 @@ async function getGroupFromId(id) {
 
 function queueMessage(channelId, content, shouldLogTimestamp = true) {
     if (shouldLogTimestamp)
-        content = `[${(new Date()).toLocaleTimeString()} - ${(new Date()).toLocaleDateString()}] ${content}`;
+        content = `[<t:${Math.round(Date.now() / 1000)}:T> - <t:${Math.round(Date.now() / 1000)}:d>] ${content}`;
 
     if (channelId in messagesQueue)
         messagesQueue[channelId] += '\n' + content;
@@ -340,7 +340,7 @@ function log(type, content, isInstant = false)
     if (!config.channels.log[type])
         return;
 
-        // Заметка: Regex детектит ссылки, но какого-то ебанного хуя этот еблан который писал этот регикс настолько даун что оно детектит любые цифры через : (например 12:12:12)
+    // Заметка: Regex детектит ссылки, но какого-то ебанного хуя этот еблан который писал этот регикс настолько даун что оно детектит любые цифры через : (например 12:12:12)
     let stripped = content; //.replace(/\b((?:[a-z-\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.-a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/g, '')
     config.channels.log[type].forEach(channelId => isInstant ? sendMessage(channelId, stripped, true) : queueMessage(channelId, stripped));
 }
@@ -431,10 +431,13 @@ async function handleMessagesQueue() {
                 let i = 0;
 
                 while (msg.length < 1900) {
-                    msg += split[i];
+                    if (split[i].match("/\[\d/g")) {
+                        msg += "\n" + split[i];
+                    }
+                    else msg += split[i];
                     i++;
                 }
-                
+
                 sendMessage(channelId, msg);
 
                 messagesQueue[channelId] = messagesQueue[channelId].substring(msg.length, messagesQueue[channelId].length)

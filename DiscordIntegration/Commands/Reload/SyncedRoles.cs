@@ -17,7 +17,7 @@ namespace DiscordIntegration.Commands.Reload
     /// </summary>
     internal sealed class SyncedRoles : ICommand
     {
-#pragma warning disable SA1600 // Elements should be documented
+        public bool SanitizeResponse { get; } = false;
         private SyncedRoles()
         {
         }

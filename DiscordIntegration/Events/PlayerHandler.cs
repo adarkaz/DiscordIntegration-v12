@@ -103,14 +103,14 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerInsertingGeneratorTablet)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorInserted, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorInserted, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnOpeningGenerator(OpeningGeneratorEventArgs ev)
     {
         if (!ev.IsAllowed) return;
         if (Instance.Config.EventsToLog.PlayerOpeningGenerator)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorOpened, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorOpened, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnUnlockingGenerator(UnlockingGeneratorEventArgs ev)
@@ -118,7 +118,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerUnlockingGenerator)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorUnlocked, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorUnlocked, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnChangingItem(ChangingItemEventArgs ev)
@@ -134,7 +134,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.GainingScp079Experience)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GainedExperience, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Amount, ev.GainType))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GainedExperience, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Amount, ev.GainType))).ConfigureAwait(false);
     }
 
     public async void OnGainingLevel(GainingLevelEventArgs ev)
@@ -142,13 +142,13 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.GainingScp079Level)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GainedLevel, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.NewLevel - 1, ev.NewLevel))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GainedLevel, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.NewLevel - 1, ev.NewLevel))).ConfigureAwait(false);
     }
 
     public async void OnDestroying(DestroyingEventArgs ev)
     {
         if (Instance.Config.EventsToLog.PlayerLeft)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.LeftServer, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.LeftServer, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnReloadingWeapon(ReloadingWeaponEventArgs ev)
@@ -156,7 +156,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.ReloadingPlayerWeapon)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Reloaded, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Player.CurrentItem.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Reloaded, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Player.CurrentItem.Type))).ConfigureAwait(false);
     }
 
     public async void OnActivatingWarheadPanel(ActivatingWarheadPanelEventArgs ev)
@@ -164,7 +164,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerActivatingWarheadPanel)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.AccessedWarhead, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.AccessedWarhead, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnInteractingElevator(InteractingElevatorEventArgs ev)
@@ -172,7 +172,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerInteractingElevator)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.CalledElevator, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Lift.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.CalledElevator, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Lift.Type))).ConfigureAwait(false);
     }
 
     public async void OnInteractingLocker(InteractingLockerEventArgs ev)
@@ -180,7 +180,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerInteractingLocker)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.UsedLocker, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.UsedLocker, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnClosingGenerator(ClosingGeneratorEventArgs ev)
@@ -188,7 +188,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerClosingGenerator)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorClosed, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorClosed, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnEjectingGeneratorTablet(StoppingGeneratorEventArgs ev)
@@ -196,7 +196,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerEjectingGeneratorTablet)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorEjected, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.GeneratorEjected, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnInteractingDoor(InteractingDoorEventArgs ev)
@@ -204,7 +204,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerInteractingDoor && ev.Door.IsKeycardDoor)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(ev.Door.IsOpen ? Language.HasClosedADoor : Language.HasOpenedADoor, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Door.Nametag))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(ev.Door.IsOpen ? Language.HasClosedADoor : Language.HasOpenedADoor, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Door.Nametag))).ConfigureAwait(false);
     }
 
     public async void OnActivatingScp914(ActivatingEventArgs ev)
@@ -212,7 +212,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.ActivatingScp914)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp914HasBeenActivated, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, Scp914.KnobStatus))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp914HasBeenActivated, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, Scp914.KnobStatus))).ConfigureAwait(false);
     }
 
     public async void OnTeleporting(EnteringPocketDimensionEventArgs ev)
@@ -220,7 +220,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.ActivatingScp914)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp914HasBeenActivated, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, Scp914.KnobStatus))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp914HasBeenActivated, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, Scp914.KnobStatus))).ConfigureAwait(false);
     }
 
     public async void OnChangingScp914KnobSetting(ChangingKnobSettingEventArgs ev)
@@ -228,7 +228,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.ChangingScp914KnobSetting)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp914KnobSettingChanged, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.KnobSetting))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp914KnobSettingChanged, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.KnobSetting))).ConfigureAwait(false);
     }
 
     public async void OnEnteringPocketDimension(EnteringPocketDimensionEventArgs ev)
@@ -236,7 +236,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerEnteringPocketDimension)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasEnteredPocketDimension, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasEnteredPocketDimension, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnEscapingPocketDimension(EscapingPocketDimensionEventArgs ev)
@@ -244,7 +244,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerEscapingPocketDimension)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasEscapedPocketDimension, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasEscapedPocketDimension, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnTeleporting(TeleportingEventArgs ev)
@@ -252,14 +252,14 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.Scp106Teleporting)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp106Teleported, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp106Teleported, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
     private async void OnStalking(StalkingEventArgs ev)
     {
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.Scp106Stalking)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp106Stalking, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.Scp106Stalking, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnInteractingTesla(InteractingTeslaEventArgs ev)
@@ -269,7 +269,7 @@ internal sealed class PlayerHandler
         // 079 interacting tesla;
 
         if (Instance.Config.EventsToLog.Scp079InteractingTesla)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.SCP079ActivatedTeslaGate, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.SCP079ActivatedTeslaGate, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
     /*private async void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
     {
@@ -281,7 +281,7 @@ internal sealed class PlayerHandler
             if (ev.Tesla.PlayersInTriggerRange.Contains(ev.Player)) return;
 
             if (Instance.Config.EventsToLog.PlayerTriggeringTesla)
-                await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.PlayerTriggeredTeslaGate, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+                await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.PlayerTriggeredTeslaGate, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
         } catch(Exception ex)
         {
             Log.Error(ex);
@@ -296,7 +296,7 @@ internal sealed class PlayerHandler
         if ((ev.Player.Health - ev.Amount) <= 0) return;
 
         if (Instance.Config.EventsToLog.HurtingPlayer && !Instance.Config.BlacklistedDamageTypes.Contains(ev.DamageHandler.Type))
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasDamagedForWith, ev.Attacker?.Nickname ?? "Server", ev.Attacker.UserId, ev.Attacker?.Role ?? RoleTypeId.None, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Amount, ev.DamageHandler.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasDamagedForWith, ev.Attacker?.Nickname ?? "Server", ev.Attacker.UserId, ev.Attacker?.Role ?? RoleTypeId.None, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Amount, ev.DamageHandler.Type))).ConfigureAwait(false);
         
     }
 
@@ -305,19 +305,19 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerDying && ev.Player != null && (ev.Attacker == null || ev.Attacker.Role.Side == ev.Player.Role.Side))
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasKilledWith, ev.Attacker != null ? ev.Attacker.Nickname : "Server", ev.Attacker.UserId, ev.Attacker?.Role ?? RoleTypeId.None, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.DamageHandler.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasKilledWith, ev.Attacker != null ? ev.Attacker.Nickname : "Server", ev.Attacker.UserId, ev.Attacker?.Role ?? RoleTypeId.None, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.DamageHandler.Type))).ConfigureAwait(false);
     }
 
     public async void OnThrowingGrenade(ThrownProjectileEventArgs ev)
     {
         if (ev.Player != null && Instance.Config.EventsToLog.PlayerThrowingGrenade)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.ThrewAGrenade, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Projectile.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.ThrewAGrenade, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Projectile.Type))).ConfigureAwait(false);
     }
 
     public async void OnUsedMedicalItem(UsedItemEventArgs ev)
     {
         if (ev.Player != null && Instance.Config.EventsToLog.PlayerUsedMedicalItem)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.UsedMedicalItem, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, $"{ev.Item.Type} [{ev.Item.Weight}]"))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.UsedMedicalItem, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, $"{ev.Item.Type} [{ev.Item.Weight}]"))).ConfigureAwait(false);
     }
 
     public async void OnChangingRole(ChangingRoleEventArgs ev)
@@ -325,7 +325,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (ev.Player != null && Instance.Config.EventsToLog.ChangingPlayerRole)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.ChangedRole, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.NewRole))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.ChangedRole, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.NewRole))).ConfigureAwait(false);
     }
 
     public async void OnVerified(VerifiedEventArgs ev)
@@ -349,7 +349,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerRemovingHandcuffs)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasBeenFreedBy, ev.Target.Nickname, ev.Target.UserId, ev.Target.Role, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasBeenFreedBy, ev.Target.Nickname, ev.Target.UserId, ev.Target.Role, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnHandcuffing(HandcuffingEventArgs ev)
@@ -357,7 +357,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.HandcuffingPlayer)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasBeenHandcuffedBy, ev.Target.Nickname, ev.Target.UserId, ev.Target.Role, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasBeenHandcuffedBy, ev.Target.Nickname, ev.Target.UserId, ev.Target.Role, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnKicking(KickingEventArgs ev)
@@ -379,7 +379,7 @@ internal sealed class PlayerHandler
         if (ev.Player.VoiceChannel == VoiceChat.VoiceChatChannel.Intercom) return;
 
         if (Instance.Config.EventsToLog.PlayerIntercomSpeaking)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasStartedUsingTheIntercom, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasStartedUsingTheIntercom, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
 
     public async void OnPickingUpItem(PickingUpItemEventArgs ev)
@@ -387,7 +387,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerPickingupItem)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasPickedUp, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Pickup.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasPickedUp, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Pickup.Type))).ConfigureAwait(false);
     }
 
     public async void OnItemDropped(DroppingItemEventArgs ev)
@@ -395,7 +395,7 @@ internal sealed class PlayerHandler
         if (!ev.IsAllowed) return;
 
         if (Instance.Config.EventsToLog.PlayerItemDropped)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasDropped, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role, ev.Item.Type))).ConfigureAwait(false);
+            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasDropped, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Item.Type))).ConfigureAwait(false);
     }
 
     public async void OnChangingGroup(ChangingGroupEventArgs ev)

@@ -9,6 +9,7 @@
     using static DiscordIntegration;
     internal sealed class PlayerList : ICommand
     {
+        public bool SanitizeResponse { get; } = false;
         private PlayerList()
         {
         }
