@@ -310,7 +310,7 @@ async function getGroupFromId(id) {
 
 function queueMessage(channelId, content, shouldLogTimestamp = true) {
     if (shouldLogTimestamp)
-        content = `[<t:${Math.round(Date.now() / 1000)}:T> - <t:${Math.round(Date.now() / 1000)}:d>] ${content}`;
+        content = `[<t:${Math.round(Date.now() / 1000)}:T> - ${(new Date()).getDate()}.${(new Date()).getMonth()}.${(new Date()).getFullYear()}] ${content}`;
 
     if (channelId in messagesQueue)
         messagesQueue[channelId] += '\n' + content;
@@ -322,7 +322,7 @@ function sendMessage(channelId, content, shouldLogTimestamp = false) {
 
 
     if (shouldLogTimestamp)
-        content = `[${(new Date()).toLocaleTimeString()}] ${content}`;
+        content = `[<t:${Math.round(Date.now() / 1000)}:T> - ${(new Date()).getDate()}.${(new Date()).getMonth()}.${(new Date()).getFullYear()}] ${content}`;
 
     const channel = discordServer.channels.cache.find(channel => channel.id === channelId);
 
