@@ -1,54 +1,47 @@
-﻿namespace DiscordIntegration.Commands
+﻿namespace DiscordIntegration.Commands;
+
+using System;
+using System.Text;
+using CommandSystem;
+using Exiled.API.Features;
+using Exiled.Permissions.Extensions;
+using NorthwoodLib.Pools;
+using static DiscordIntegration;
+public class PlayerList : ICommand
 {
-    using System;
-    using System.Text;
-    using CommandSystem;
-    using Exiled.API.Features;
-    using Exiled.Permissions.Extensions;
-    using NorthwoodLib.Pools;
-    using static DiscordIntegration;
-    internal sealed class PlayerList : ICommand
+    public bool SanitizeResponse { get; } = false;
+    public string Command { get; } = "playerlist";
+
+    public string[] Aliases { get; } = new[] { "pli" };
+
+    public string Description { get; } = Language.PlayerListCommandDescription;
+
+    public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
     {
-        public bool SanitizeResponse { get; } = false;
-        private PlayerList()
+        if (!sender.CheckPermission("di.playerlist"))
         {
+            response = string.Format(Language.NotEnoughPermissions, "di.playerlist");
+            return false;
         }
 
-        public static PlayerList Instance { get; } = new PlayerList();
+        StringBuilder message = StringBuilderPool.Shared.Rent();
 
-        public string Command { get; } = "playerlist";
+        message.Append('\n');
 
-        public string[] Aliases { get; } = new[] { "pli" };
-
-        public string Description { get; } = Language.PlayerListCommandDescription;
-
-        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        if (Player.Dictionary.Count == 0)
         {
-            if (!sender.CheckPermission("di.playerlist"))
-            {
-                response = string.Format(Language.NotEnoughPermissions, "di.playerlist");
-                return false;
-            }
-
-            StringBuilder message = StringBuilderPool.Shared.Rent();
-
-            message.Append('\n');
-
-            if (Player.Dictionary.Count == 0)
-            {
-                message.Append(Language.NoPlayersOnline);
-            }
-            else
-            {
-                foreach (Player player in Player.List)
-                    message.Append($"{player.Nickname} - {player.UserId} ({player.Id})").AppendLine();
-            }
-
-            response = message.ToString();
-
-            StringBuilderPool.Shared.Return(message);
-
-            return true;
+            message.Append(Language.NoPlayersOnline);
         }
+        else
+        {
+            foreach (Player player in Player.List)
+                message.Append($"`{player.Nickname} - {player.UserId} ({player.Id})`").AppendLine();
+        }
+
+        response = message.ToString();
+
+        StringBuilderPool.Shared.Return(message);
+
+        return true;
     }
 }

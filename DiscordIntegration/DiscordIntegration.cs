@@ -53,7 +53,6 @@ public class DiscordIntegration : Plugin<Config>
         NetworkHandler = new();
 
         Bot.UpdateActivityCancellationTokenSource = new CancellationTokenSource();
-        Bot.UpdateChannelsTopicCancellationTokenSource = new CancellationTokenSource();
 
         _ = Network.Start(NetworkCancellationTokenSource.Token);
 
@@ -74,9 +73,6 @@ public class DiscordIntegration : Plugin<Config>
 
         Bot.UpdateActivityCancellationTokenSource.Cancel();
         Bot.UpdateActivityCancellationTokenSource.Dispose();
-
-        Bot.UpdateChannelsTopicCancellationTokenSource.Cancel();
-        Bot.UpdateChannelsTopicCancellationTokenSource.Dispose();
 
         SyncedUsersCache.Clear();
 

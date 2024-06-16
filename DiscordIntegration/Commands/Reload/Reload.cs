@@ -33,7 +33,6 @@ namespace DiscordIntegration.Commands.Reload
         {
             RegisterCommand(Configs.Instance);
             RegisterCommand(Language.Instance);
-            RegisterCommand(SyncedRoles.Instance);
         }
 
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -52,9 +51,8 @@ namespace DiscordIntegration.Commands.Reload
 
             Configs.Instance.Execute(arguments, sender, out string configsResponse);
             Language.Instance.Execute(arguments, sender, out string languageResponse);
-            SyncedRoles.Instance.Execute(arguments, sender, out string syncedRolesResponse);
 
-            response = $"{configsResponse} {languageResponse} {syncedRolesResponse}";
+            response = $"{configsResponse} {languageResponse}";
             return false;
         }
     }

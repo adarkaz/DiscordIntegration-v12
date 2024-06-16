@@ -10,8 +10,6 @@
     {
         private StringBuilder StringBuilder = new();
         public bool SanitizeResponse { get; } = false;
-        public static StaffList Instance { get; } = new StaffList();
-
         public string Command { get; } = "stafflist";
 
         public string[] Aliases { get; } = new[] { "sl" };
@@ -31,13 +29,9 @@
 
             foreach (Player player in Player.List)
             {
-                if (!player.RemoteAdminAccess || player.Group == null || player.GroupName == null) continue;
+                if (!player.RemoteAdminAccess || player.Group == null) continue;
 
-                StringBuilder.Append(player.Nickname);
-                StringBuilder.Append(" - ");
-                StringBuilder.Append($"{player.UserId} ({player.Id})");
-                StringBuilder.Append(" - ");
-                StringBuilder.Append(player.GroupName).AppendLine();
+                StringBuilder.Append($"`{player.Nickname} - {player.UserId} ({player.Id}) - {player.Group.BadgeText}`").AppendLine();
             }
 
             if (StringBuilder.Length == 0)

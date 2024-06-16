@@ -10,7 +10,6 @@
     public sealed class Bot
     {
         public static CancellationTokenSource UpdateActivityCancellationTokenSource { get; internal set; }
-        public static CancellationTokenSource UpdateChannelsTopicCancellationTokenSource { get; internal set; }
 
         [Description("Bot IP address")]
         public string IPAddress { get; private set; } = "127.0.0.1";
