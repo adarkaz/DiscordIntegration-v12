@@ -15,12 +15,14 @@ using PlayerRoles;
 namespace DiscordIntegration.Events;
 
 using Exiled.API.Features;
+using MEC;
+using System.Collections.Generic;
 using static DiscordIntegration;
 internal sealed class PlayerHandler
 {
     public PlayerHandler()
     {
-        //PlayerEvent.TriggeringTesla += OnTriggeringTesla;
+        PlayerEvent.TriggeringTesla += OnTriggeringTesla;
         PlayerEvent.UsedItem += OnUsedMedicalItem;
         PlayerEvent.PickingUpItem += OnPickingUpItem;
         PlayerEvent.ActivatingGenerator += OnInsertingGeneratorTablet;
@@ -59,7 +61,7 @@ internal sealed class PlayerHandler
     }
     ~PlayerHandler()
     {
-        //PlayerEvent.TriggeringTesla -= OnTriggeringTesla;
+        PlayerEvent.TriggeringTesla -= OnTriggeringTesla;
         PlayerEvent.UsedItem -= OnUsedMedicalItem;
         PlayerEvent.PickingUpItem -= OnPickingUpItem;
         PlayerEvent.ActivatingGenerator -= OnInsertingGeneratorTablet;
@@ -271,33 +273,54 @@ internal sealed class PlayerHandler
         if (Instance.Config.EventsToLog.Scp079InteractingTesla)
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.SCP079ActivatedTeslaGate, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
-    /*private async void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
+    
+    public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
     {
 
         try
         {
             if (!ev.IsAllowed || !ev.IsTriggerable || ev.DisableTesla) return;
 
-            if (ev.Tesla.PlayersInTriggerRange.Contains(ev.Player)) return;
+            if (!Instance.Config.EventsToLog.PlayerTriggeringTesla) return;
 
-            if (Instance.Config.EventsToLog.PlayerTriggeringTesla)
-                await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.PlayerTriggeredTeslaGate, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
+            if (CurrentTeslaCoroutineProcessing.Contains(ev.Player)) return;
+
+            // await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.PlayerTriggeredTeslaGate, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
+
+            Timing.RunCoroutine(TeslaPlayer(ev.Player, ev.Tesla));
+
         } catch(Exception ex)
         {
             Log.Error(ex);
         }
-    }*/
+    }
+    public static readonly List<Player> CurrentTeslaCoroutineProcessing = new();
+    public static IEnumerator<float> TeslaPlayer(Player pl, TeslaGate tesla)
+    {
+        CurrentTeslaCoroutineProcessing.Add(pl);
+        DateTime startedTime = DateTime.Now;
+
+        while (tesla.PlayersInTriggerRange.Contains(pl))
+        {
+            Timing.CallDelayed(0.1f, async() => await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.PlayerTriggeredTeslaGate, pl.Nickname, pl.UserId, pl.Role.Type, $"{DateTime.Now.Subtract(startedTime).TotalSeconds} секунд"))).ConfigureAwait(false));
+
+            yield return Timing.WaitForSeconds(5f);
+        }
+
+        CurrentTeslaCoroutineProcessing.Remove(pl);
+
+        yield return Timing.WaitForOneFrame;
+    }
 
     public async void OnHurting(HurtingEventArgs ev)
     {
         if (ev.Player == null || !ev.IsAllowed) return;
 
-        // Я - смерть.
         if ((ev.Player.Health - ev.Amount) <= 0) return;
 
         if (Instance.Config.EventsToLog.HurtingPlayer && !Instance.Config.BlacklistedDamageTypes.Contains(ev.DamageHandler.Type))
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasDamagedForWith, ev.Attacker?.Nickname ?? "Server", ev.Attacker.UserId, ev.Attacker?.Role ?? RoleTypeId.None, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type, ev.Amount, ev.DamageHandler.Type))).ConfigureAwait(false);
-        
+
     }
 
     public async void OnDying(DyingEventArgs ev)
@@ -330,16 +353,6 @@ internal sealed class PlayerHandler
 
     public async void OnVerified(VerifiedEventArgs ev)
     {
-        if (Instance.Config.ShouldSyncRoles)
-        {
-            SyncedUser syncedUser = Instance.SyncedUsersCache.FirstOrDefault(tempSyncedUser => tempSyncedUser?.Id == ev.Player.UserId);
-
-            if (syncedUser == null)
-                await Network.SendAsync(new RemoteCommand("getGroupFromId", ev.Player.UserId)).ConfigureAwait(false);
-            else
-                syncedUser?.SetGroup();
-        }
-
         if (Instance.Config.EventsToLog.PlayerJoined)
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasJoinedTheGame, ev.Player.Nickname, ev.Player.UserId, ev.Player.IPAddress))).ConfigureAwait(false);
     }
@@ -381,7 +394,6 @@ internal sealed class PlayerHandler
         if (Instance.Config.EventsToLog.PlayerIntercomSpeaking)
             await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasStartedUsingTheIntercom, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
     }
-
     public async void OnPickingUpItem(PickingUpItemEventArgs ev)
     {
         if (!ev.IsAllowed) return;

@@ -65,7 +65,7 @@ public sealed class Language
 
     public string HasEscapedPocketDimension { get; set; } = ":high_brightness: {0} ({1}) [{2}] вышёл из измерения 106.";
 
-    public string PlayerTriggeredTeslaGate { get; set; } = ":zap: {0} ({1}) [{2}] активировал тесла-ворота.";
+    public string PlayerTriggeredTeslaGate { get; set; } = ":zap: {0} ({1}) [{2}] активировал тесла-ворота на протяжении {3}";
     public string SCP079ActivatedTeslaGate { get; set; } = ":zap: {0} ({1}) [{2}] использовал способность активации тесла-ворот.";
 
     public string Scp914ProcessedItem { get; set; } = ":gear: SCP-914 обработал: **{0}**";

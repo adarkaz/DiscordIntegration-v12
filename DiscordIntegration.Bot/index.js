@@ -431,16 +431,19 @@ async function handleMessagesQueue() {
                 let i = 0;
 
                 while (msg.length < 1900) {
-                    if (split[i].match(/\[\d/g)) {
+                    // if (!split[i].match(/\*\*.*\*\*/g) && split[i].match(/\*\*/g)) split[i] += "**";
+
+                    if (split[i].match(/^\[/g)) {
                         msg += "\n" + split[i];
                     }
                     else msg += split[i];
+
                     i++;
                 }
 
                 sendMessage(channelId, msg);
 
-                messagesQueue[channelId] = messagesQueue[channelId].substring(msg.length, messagesQueue[channelId].length)
+                messagesQueue[channelId] = messagesQueue[channelId].substring(msg.length - 1, messagesQueue[channelId].length + 1)
             }
             else {
                 sendMessage(channelId, message_queue);
