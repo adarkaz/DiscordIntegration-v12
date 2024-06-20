@@ -53,7 +53,7 @@ public sealed class Language
 
     public string WasBannedBy { get; set; } = ":no_entry: {0} ({1}) был забанен {2} за {3} до {4}.";
 
-    public string HasStartedUsingTheIntercom { get; set; } = ":loud_sound: {0} ({1}) [{2}] начал использовать интерком.";
+    public string HasStartedUsingTheIntercom { get; set; } = ":loud_sound: {0} ({1}) [{2}] использует интерком на протяжении {3}";
 
     public string HasPickedUp { get; set; } = "{0} ({1}) [{2}] поднял **{3}**.";
 

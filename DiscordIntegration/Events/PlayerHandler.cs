@@ -385,14 +385,37 @@ internal sealed class PlayerHandler
 
         await Network.SendAsync(new RemoteCommand("log", "bans", $":no_entry: {ev.Target.Nickname} ({ev.Target.UserId} - {ev.Target.IPAddress}) был забанен {ev.Player.Nickname} ({ev.Player.UserId}) по причине: {ev.Reason}\nдо {DateTime.Now.AddSeconds(ev.Duration).ToString("HH:mm:ss - dd.MM.yyyy")}"));
     }
-    public async void OnIntercomSpeaking(IntercomSpeakingEventArgs ev)
+    public void OnIntercomSpeaking(IntercomSpeakingEventArgs ev)
     {
         if (ev.Player == null) return;
         if (!ev.IsAllowed || ev.Player.IsIntercomMuted) return;
-        if (ev.Player.VoiceChannel == VoiceChat.VoiceChatChannel.Intercom) return;
+        if (!Instance.Config.EventsToLog.PlayerIntercomSpeaking) return;
+        if (CurrentIntercomCoroutineProcessing.Contains(ev.Player)) return;
 
-        if (Instance.Config.EventsToLog.PlayerIntercomSpeaking)
-            await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasStartedUsingTheIntercom, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
+        Timing.RunCoroutine(IntercomPlayer(ev.Player));
+
+
+        // await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasStartedUsingTheIntercom, ev.Player.Nickname, ev.Player.UserId, ev.Player.Role.Type))).ConfigureAwait(false);
+    }
+    public static readonly List<Player> CurrentIntercomCoroutineProcessing = new();
+    public static IEnumerator<float> IntercomPlayer(Player pl)
+    {
+        CurrentIntercomCoroutineProcessing.Add(pl);
+
+        yield return Timing.WaitForSeconds(1);
+
+        DateTime startedTime = DateTime.Now;
+
+        while (Intercom.Speaker == pl)
+        {
+            Timing.CallDelayed(0.1f, async () => await Network.SendAsync(new RemoteCommand("log", "gameEvents", string.Format(Language.HasStartedUsingTheIntercom, pl.Nickname, pl.UserId, pl.Role.Type, $"{DateTime.Now.Subtract(startedTime).TotalSeconds} секунд"))).ConfigureAwait(false));
+
+            yield return Timing.WaitForSeconds(5f);
+        }
+
+        CurrentIntercomCoroutineProcessing.Remove(pl);
+
+        yield return Timing.WaitForOneFrame;
     }
     public async void OnPickingUpItem(PickingUpItemEventArgs ev)
     {
