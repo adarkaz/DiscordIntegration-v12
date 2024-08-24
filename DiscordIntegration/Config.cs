@@ -5,15 +5,15 @@ using Exiled.API.Enums;
 using Exiled.API.Interfaces;
 
 namespace DiscordIntegration;
-public sealed class Config : IConfig
+public class Config : IConfig
 {
-    [Description("Определяет включён плагин или нет.")]
+    [Description("ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГІ ГўГЄГ«ГѕГ·ВёГ­ ГЇГ«Г ГЈГЁГ­ ГЁГ«ГЁ Г­ГҐГІ.")]
     public bool IsEnabled { get; set; } = true;
 
-    [Description("Определяет включён дебаг-мод или нет.")]
+    [Description("ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГІ ГўГЄГ«ГѕГ·ВёГ­ Г¤ГҐГЎГ ГЈ-Г¬Г®Г¤ ГЁГ«ГЁ Г­ГҐГІ.")]
     public bool Debug { get; set; } = false;
     public Bot Bot { get; private set; } = new Bot();
-    [Description("Ивенты для логирования..")]
+    [Description("Г€ГўГҐГ­ГІГ» Г¤Г«Гї Г«Г®ГЈГЁГ°Г®ГўГ Г­ГЁГї..")]
     public EventsToLog EventsToLog { get; private set; } = new EventsToLog();
     public List<DamageType> BlacklistedDamageTypes { get; private set; } = new List<DamageType>()
     {
