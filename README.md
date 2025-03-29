@@ -1,3 +1,7 @@
+THIS IS NOT MY CODE ORIGINALY, IT WAS UPDATED TO NEWEST VERSION OF GAME
+original repo is deleted
+
+
 # DiscordIntegration
 
 Бот и плагин, который позволяет серверу логировать действия в дискорд каналы, и посылать серверные команды через дискорд бота
